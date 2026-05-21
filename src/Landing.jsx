@@ -47,17 +47,13 @@ function Landing() {
     }}
     
     else if(e.target.innerText=="Cross"){
-        let x = [];
-        for(let i=0;i<displayans.length-1;i++){
-            x.push(displayans[i])
-        }
-        setDisplayans(x)
-
+        setDisplayans(displayans.toString().slice(0, -1));
+        setResult(pri=> pri.toString().slice(0, -1))
     }
     else {
 
-        setDisplayans([displayans ]+[ e.target.innerText]);
-        setResult(pri=>[pri]+[ e.target.innerText])
+        setDisplayans(displayans + e.target.innerText);
+        setResult(pri=> pri + e.target.innerText)
     }
   }
   const detectkey = (e)=>{
@@ -95,21 +91,21 @@ function Landing() {
 
     }}
     else if(e.key=="Backspace"){
-        let x = [];
-        for(let i=0;i<displayans.length-1;i++){
-            x.push(displayans[i])
-        }
-        setDisplayans(x)
+        setDisplayans(displayans.toString().slice(0, -1));
+        setResult(pri=> pri.toString().slice(0, -1))
     }
     else if("1234567890+-*/".includes(e.key)){
-        setDisplayans([displayans ]+[ e.key]);
-        setResult(pri=>[pri]+[ e.key])
+        setDisplayans(displayans + e.key);
+        setResult(pri=> pri + e.key)
     }
 
   }
   useEffect(()=>{
-    document.addEventListener('keydown',detectkey,true)
-  },[])
+    document.addEventListener('keydown', detectkey);
+    return () => {
+      document.removeEventListener('keydown', detectkey);
+    };
+  }, [displayans]);
 
 
 
