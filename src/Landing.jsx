@@ -109,7 +109,7 @@ function Landing() {
   }
   useEffect(()=>{
     document.addEventListener('keydown',detectkey,true)
-  })
+  },[])
 
 
 
